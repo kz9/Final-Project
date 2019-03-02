@@ -4,7 +4,7 @@
 
 ###### Copyright WRAL TechWire
 
-<hr>
+---
 
 ## Author:
 - "Kaz Jiang"
