@@ -1,7 +1,6 @@
 # INFO201 Final Group Project Proposal
 
 ![Cancer](https://www.wraltechwire.com/wp-content/uploads/2018/04/cancer.jpg)
-
 ###### Copyright WRAL TechWire
 
 <hr>
