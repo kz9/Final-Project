@@ -16,7 +16,7 @@ Our target **audiences** could be professional public health staff, as well as p
     + Does cancer mortality show any differences between male and female?
 
 ## Technical Description
-- In the final project we will use both _API_ and _csv_ in order to achieve our goal.  From API, we will use `httr` and `jsonlite` libraries to parse the _JSON data_ from api to a R data frame. From .csv, we will just use basic read.csv function to parse the data\
+- In the final project we will use both _API_ and _csv_ in order to achieve our goal.  From API, we will use `httr` and `jsonlite` libraries to parse the _JSON data_ from api to a R data frame. From .csv, we will just use basic read.csv function to parse the data.
 - We will separate dataset to **two major groups** (_mortality_ and _incident_) then sort the data in order to make _visualize_ easier. Also, we will filter out the NA value in order to make dataset valid. Additionally, we will probably modify both API data and csv data in order to make a join.
-- This time we will focus on libraries: `shiny`, `httr`, `jsonlite`, `ploty`, and maybe some other libraries which will make the **visualization** more efficient.\
+- This time we will focus on libraries: `shiny`, `httr`, `jsonlite`, `ploty`, and maybe some other libraries which will make the **visualization** more efficient.
 - The major **challenges**: Make a well format dataset to work with because most of cancer dataset are badly formatted. Make a beautiful visualization and also easy for client to understand. Make an **attractive R based website**.
