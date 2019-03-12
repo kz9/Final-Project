@@ -1,10 +1,8 @@
 # pie chart for site versus state
 # load needed library
-library(tidyr)
 library(dplyr)
 library(plotly)
-#library(plotrix)
-library(ggplot2)
+library(plotrix)
 
 # function for pie chart
 # state_pass: a string of state name
@@ -20,16 +18,6 @@ build_pie <- function(data, state_pass, site_pass, min, max){
       age_adjusted_rate = sum(age_adjusted_rate, na.rm = T),
       crude_rate = sum(crude_rate, na.rm = T)
     )
-  
-  # bp <- ggplot(modified_data,
-  #              aes(x="", y=values,
-  #                  fill=c("Age Adjusted Rate", "Crude Rate")))+
-  #   geom_bar(width = 1, stat = "identity")+
-  #   coord_polar("y", start=0)+
-  #   scale_fill_brewer(palette = "Blues")+
-  #   theme_minimal()+
-  #   labs(fill = "Features")
-  # bp
   
   sum <- modified_data$age_adjusted_rate + modified_data$crude_rate +
     modified_data$total_population
