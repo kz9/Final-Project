@@ -1,3 +1,6 @@
+# ignore large csv
+*.csv
+
 # api file
 api-keys.R
 
