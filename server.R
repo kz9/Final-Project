@@ -9,6 +9,7 @@ source("./scripts/map.R")
 source("./scripts/pie.R")
 source("./scripts/plot.R")
 source("./scripts/sorted_data.R")
+source("./scripts/sankey.R")
 
 # start shiny server
 shinyServer(function(input, output){
