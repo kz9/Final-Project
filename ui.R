@@ -2,6 +2,7 @@
 # load needed library
 library(shiny)
 library(shinythemes)
+library(plotly)
 
 source("./scripts/sorted_data.R")
 

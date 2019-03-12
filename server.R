@@ -2,6 +2,7 @@
 # load needed library
 library(shiny)
 library(shinythemes)
+library(plotly)
 
 # read in functions and data
 source("./scripts/map.R")
