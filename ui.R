@@ -120,5 +120,50 @@ shinyUI(fluidPage(
         plotOutput("pie_output")
       )
     )
+  ),
+  # tab for Sankey diagram
+  tabPanel(
+    "Sankey Diagram",
+    titlePanel("Sankey Diagram options"),
+    sidebarLayout(
+      sidebarPanel(
+        checkboxGroupInput(
+          "sankey_state",
+          label = "State of Your Choice",
+          choices = unique(modified_data$area),
+          selected = "Alabama"
+        ),
+        checkboxGroupInput(
+          "sankey_race",
+          label = "Race of Your Choice",
+          choices = unique(modified_data$race),
+          selected = "All Races"
+        ),
+        checkboxGroupInput(
+          "sankey_sex",
+          label = "Gender of Your Choice",
+          choices = unique(modified_data$sex),
+          selected = "Male and Female"
+        ),
+        checkboxGroupInput(
+          "sankey_site",
+          label = "Site of Your Choice",
+          choices = unique(modified_data$site),
+          selected = "All Cancer Sites Combined"
+        ),
+        sliderInput(
+          "sankey_year",
+          label = "Select your desired year range",
+          min = min(modified_data$year),
+          max = max(modified_data$year),
+          value = c(min, max)
+        )
+      ),
+      
+      # Sankey position
+      mainPanel(
+        plotlyOutput("sankey_output")
+      )
+    )
   )
 )))

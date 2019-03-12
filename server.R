@@ -28,5 +28,12 @@ shinyServer(function(input, output){
     build_pie(modified_data, input$pie_state, input$pie_site,
               input$pie_year[1], input$pie_year[2])
   })
+  
+  # Sankey Diagram
+  output$sankey_output <- renderPlotly({
+    build_sankey(modified_data, input$sankey_state, input$sankey_race,
+                 input$sankey_sex, input$sankey_year[1], input$sankey_year[2],
+                 input$sankey_site)
+  })
 })
 
