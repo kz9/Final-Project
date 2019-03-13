@@ -27,7 +27,8 @@ build_line <- function(data, sex_pass, site_pass, min, max, option) {
     sex <- sex_pass[i]
     p <- add_trace(p, y=modified_data[[sex]], x=~year,
                    type="scatter", mode="markers+lines",
-                   name=sex_pass[i])
+                   name=sex_pass[i]) %>%
+      layout(colorway = c('#764EC5', '#DAB72D', '#969696'))
   }
   p
 }

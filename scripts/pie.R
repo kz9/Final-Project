@@ -24,5 +24,7 @@ build_pie <- function(data, state_pass, site_pass, min, max){
   pie3D(c(modified_data$age_adjusted_rate,
                modified_data$crude_rate),
         labels = c("Age Adjusted Rate", "Crude Rate"),
-      main = "Pie Chart of Site VS State")
+        explode = 0.1, 
+      main = "Pie Chart of Site VS State",
+  col=c("#DAB72D","#764EC5"))
 }
