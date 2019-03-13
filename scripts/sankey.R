@@ -26,7 +26,7 @@ build_sankey <- function(data, state_pass, race_pass, sex_pass,
   table_sr <- modified_data %>%
     group_by(area, race) %>%
     summarise(
-      total_pop = sum(population, na.rm = T)
+      total_pop = sum(count, na.rm = T)
     ) %>%
     mutate(
       area_index = match(area, label_list) - 1,
@@ -37,7 +37,7 @@ build_sankey <- function(data, state_pass, race_pass, sex_pass,
   table_rs <- modified_data %>%
     group_by(race, sex) %>%
     summarise(
-      total_pop = sum(population, na.rm = T)
+      total_pop = sum(count, na.rm = T)
     ) %>%
     mutate(
       race_index = match(race, label_list) - 1,
@@ -48,26 +48,16 @@ build_sankey <- function(data, state_pass, race_pass, sex_pass,
   table_ss <- modified_data %>%
     group_by(sex, site) %>%
     summarise(
-      total_pop = sum(population, na.rm = T)
+      total_pop = sum(count, na.rm = T)
     ) %>%
     mutate(
       sex_index = match(sex, label_list) - 1,
       site_index = match(site, label_list) - 1
     )
-  
-    
-  
-  
+
+  # make a sankey diagram  
   p <- plot_ly(
     type = "sankey",
-    # domain = list(
-    #   x =  c(0,1),
-    #   y =  c(0,1)
-    # ),
-    # orientation = "h",
-    # valueformat = ".0f",
-    # valuesuffix = "TWh",
-    
     node = list(
       label = label_list,
       color = "#764EC5",
