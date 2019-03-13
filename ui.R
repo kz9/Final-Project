@@ -64,10 +64,11 @@ shinyUI(fluidPage(
             label = "Data Show On Map",
             choices = list(
               "Age Adjusted Rate" = "age_adjusted_rate",
-              "Cancer population" = "population",
+              "Cancer population" = "count",
+              "Total population"  = "population",
               "Crude Rate"        = "crude_rate"
             ),
-            selected = "Cancer population"
+            selected = "Age Adjusted Rate"
           ),
           sliderInput(
             "map_year",
@@ -117,7 +118,7 @@ shinyUI(fluidPage(
             label = "Feature of Your Choice",
             choices = list(
             "Age Adjust Rage" = "age_adjusted_rate",
-            "Cancer Population" = "population",
+            "Cancer Population" = "count",
             "Crude Rate" = "crude_rate"
             ),
             selected = "Cancer Population"
