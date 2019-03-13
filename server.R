@@ -1,7 +1,7 @@
 # server.R
 # load needed library
 library(shiny)
-library(shinythemes)
+library(shinydashboard)
 library(plotly)
 
 # read in functions and data
@@ -13,6 +13,11 @@ source("./scripts/sankey.R")
 
 # start shiny server
 shinyServer(function(input, output){
+  # select all
+  observe({
+    
+  })
+  
   # map graph
   output$map_output <- renderPlotly({
     build_map(modified_data, input$map_options, input$map_year[1],
