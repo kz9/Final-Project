@@ -82,7 +82,8 @@ build_sankey <- function(data, state_pass, race_pass, sex_pass,
       source = c(table_sr$area_index, table_rs$race_index, table_ss$sex_index),
       target = c(table_sr$race_index, table_rs$sex_index, table_ss$site_index),
       value = c(table_sr$total_pop, table_rs$total_pop, table_ss$total_pop),
-      color = "#DAB72D"
+      color = "#DAB72D",
+      label = c("Population flow", "Population flow", "Population flow")
     )
   ) %>%
     layout(

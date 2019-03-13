@@ -19,12 +19,14 @@ build_pie <- function(data, state_pass, site_pass, min, max){
       crude_rate = sum(crude_rate, na.rm = T)
     )
   
-  sum <- modified_data$age_adjusted_rate + modified_data$crude_rate +
-    modified_data$total_population
-  pie3D(c(modified_data$age_adjusted_rate,
-               modified_data$crude_rate),
-        labels = c("Age Adjusted Rate", "Crude Rate"),
+  origin <- c(modified_data$age_adjusted_rate, modified_data$crude_rate)
+  percentage <- round(origin / sum(origin) * 100, 1)
+  pie3D(origin,
+        labels = paste0(percentage, "%"),
         explode = 0.1, 
       main = "Pie Chart of Site VS State",
-  col=c("#DAB72D","#764EC5"))
+  col=c("#DAB72D","#764EC5"),
+  mar = c(4.5, 4.5, 4.5, 4.5))
+  legend("topright", c("Age Adjusted Rate", "Crude Rate"),
+         fill = c("#DAB72D","#764EC5"))
 }

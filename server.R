@@ -15,6 +15,60 @@ source("./scripts/sankey.R")
 shinyServer(function(input, output, session){
   # select all
   observe({
+    
+    # restrict checkbox for line graph
+    if (length(input$plot_gender) < 1) {
+      updateCheckboxGroupInput(session,
+                               "plot_gender",
+                               label = "Gender of Your Choice",
+                               choices = list(
+                                 "Female" = "Female",
+                                 "Male"   = "Male",
+                                 "Male and Female" = "Male and Female"
+                               ),
+                               selected = "Male and Female")
+    }
+    
+    # restrict checkbox for sankey diagram state
+    if (length(input$sankey_state) < 1) {
+      updateCheckboxGroupInput(session,
+                               "sankey_state",
+                               label = "State of Your Choice",
+                               choices = unique(modified_data$area),
+                               selected = "Alabama",
+                               inline = TRUE)
+    }
+    
+    # restrict checkbox for sankey diagram site
+    if (length(input$sankey_site) < 1) {
+      updateCheckboxGroupInput(session,
+                               "sankey_site",
+                               label = "Site of Your Choice",
+                               choices = unique(modified_data$site),
+                               selected = "All Cancer Sites Combined",
+                               inline = TRUE)
+    }
+    
+    # restrict checkbox for sankey diagram gender
+    if (length(input$sankey_sex) < 1) {
+      updateCheckboxGroupInput(session,
+                               "sankey_sex",
+                               label = "Gender of Your Choice",
+                               choices = unique(modified_data$sex),
+                               selected = "Male and Female")
+    }
+    
+    # restrict checkbox for sankey diagram race
+    if (length(input$sankey_race) < 1) {
+      updateCheckboxGroupInput(session,
+                               "sankey_race",
+                               label = "Race of Your Choice",
+                               choices = unique(modified_data$race),
+                               selected = "All Races")
+    }
+  })
+  
+  observe({
     # select all event for states
     if (input$selectall_state == 0) {
       return(NULL) 
@@ -33,41 +87,9 @@ shinyServer(function(input, output, session){
                                selected = unique(modified_data$area),
                                inline = TRUE)
     }
-    
-    # select all event for races
-    if (input$selectall_race == 0) {
-      return(NULL) 
-    } else if (input$selectall_race%%2 == 0) {
-      updateCheckboxGroupInput(session,
-                               "sankey_race",
-                               label = "Race of Your Choice",
-                               choices = unique(modified_data$race),
-                               selected = "All Races")
-    } else {
-      updateCheckboxGroupInput(session,
-                               "sankey_race",
-                               label = "Race of Your Choice",
-                               choices = unique(modified_data$race),
-                               selected = unique(modified_data$race))
-    }
-    
-    # select all event for gender
-    if (input$selectall_sex == 0) {
-      return(NULL) 
-    } else if (input$selectall_sex%%2 == 0) {
-      updateCheckboxGroupInput(session,
-                               "sankey_sex",
-                               label = "Gender of Your Choice",
-                               choices = unique(modified_data$sex),
-                               selected = "Male and Female")
-    } else {
-      updateCheckboxGroupInput(session,
-                               "sankey_sex",
-                               label = "Gender of Your Choice",
-                               choices = unique(modified_data$sex),
-                               selected = unique(modified_data$sex))
-    }
-    
+  })
+  
+  observe({
     # select all event for site
     if (input$selectall_site == 0) {
       return(NULL) 
@@ -85,6 +107,44 @@ shinyServer(function(input, output, session){
                                choices = unique(modified_data$site),
                                selected = unique(modified_data$site),
                                inline = TRUE)
+    }
+  })
+  
+  observe({
+    # select all event for races
+    if (input$selectall_race == 0) {
+      return(NULL) 
+    } else if (input$selectall_race%%2 == 0) {
+      updateCheckboxGroupInput(session,
+                               "sankey_race",
+                               label = "Race of Your Choice",
+                               choices = unique(modified_data$race),
+                               selected = "All Races")
+    } else {
+      updateCheckboxGroupInput(session,
+                               "sankey_race",
+                               label = "Race of Your Choice",
+                               choices = unique(modified_data$race),
+                               selected = unique(modified_data$race))
+    }
+  })
+  
+  observe({
+    # select all event for gender
+    if (input$selectall_sex == 0) {
+      return(NULL) 
+    } else if (input$selectall_sex%%2 == 0) {
+      updateCheckboxGroupInput(session,
+                               "sankey_sex",
+                               label = "Gender of Your Choice",
+                               choices = unique(modified_data$sex),
+                               selected = "Male and Female")
+    } else {
+      updateCheckboxGroupInput(session,
+                               "sankey_sex",
+                               label = "Gender of Your Choice",
+                               choices = unique(modified_data$sex),
+                               selected = unique(modified_data$sex))
     }
   })
   

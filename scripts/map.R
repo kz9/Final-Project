@@ -13,6 +13,9 @@ build_map <- function(data, option, min, max) {
   modified_data <- data %>%
     filter(area %in% c("District of Columbia", state.name)) %>%
     filter(year >= min, year <= max) %>%
+    filter(sex %in% "Male and Female") %>%
+    filter(race %in% "All Races") %>%
+    filter(site %in% "All Cancer Sites Combined") %>%
     mutate(code = ifelse(area == "District of Columbia", "DC",
                          state.abb[match(area ,state.name)])) %>%
     group_by(code) %>%
