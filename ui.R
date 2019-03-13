@@ -7,12 +7,10 @@ library(plotly)
 source("./scripts/sorted_data.R")
 
 shinyUI(fluidPage(
-  theme = "style.css",
-  titlePanel("Cancer Information"),
   dashboardPage(
     skin = "purple",
     dashboardHeader(
-      title = "Dashboard",
+      title = "Cancer Information",
       titleWidth = 300
     ),
     dashboardSidebar(
@@ -20,7 +18,7 @@ shinyUI(fluidPage(
       
       # setup icon for each tab
       sidebarMenu(
-        menuItem("HomePage", tabName = "home", icon = icon("dashboard")),
+        menuItem("HomePage", tabName = "home", icon = icon("home")),
         menuItem("Cancer USA Distribution", tabName = "map",
                  icon = icon("globe")),
         menuItem("Gender VS Site", tabName = "line",
@@ -34,6 +32,9 @@ shinyUI(fluidPage(
   ),
   # position for different plots
   dashboardBody(
+    tags$head(
+      tags$link(rel = "stylesheet", type = "text/css", href = "style.css")
+    ),
     tabItems(
       
       # Home Page
@@ -46,12 +47,18 @@ shinyUI(fluidPage(
       tabItem(
         tabName = "map",
         h1("Cancer Map"),
+        fluidRow(
         box(
+          width = 12,
+          status = "success",
           plotlyOutput("map_output")
+        )
         ),
         h2("Options"),
+        fluidRow(
         box(
-          color = "purple",
+          width = 12,
+          status = "info",
           selectInput(
             "map_options",
             label = "Data Show On Map",
@@ -70,18 +77,25 @@ shinyUI(fluidPage(
             value = c(min, max)
           )
         )
+        )
       ),
       
       # Line Graph
       tabItem(
         tabName = "line",
         h1("Gender VS Site Line Chart"),
+        fluidRow(
         box(
+          width = 12,
+          status = "success",
           plotlyOutput("plot_output")
+        )
         ),
         h2("Options"),
+        fluidRow(
         box(
-          color = "purple",
+          width = 12,
+          status = "info",
           checkboxGroupInput(
             "plot_gender",
             label = "Gender of Your Choice",
@@ -116,17 +130,25 @@ shinyUI(fluidPage(
             value = c(min, max)
           )
         )
+        )
       ),
       
       # tab for pie chart
       tabItem(
         tabName = "pie",
-        h1("State VS Site Pie Chart"),
+        fluidRow(
+          h1("State VS Site Pie Chart"),
+          h2("Options"),
+          hr()
+        ),
+        fluidRow(
         box(
+          status = "success",
           plotOutput("pie_output")
         ),
         box(
-          color = "purple",
+          height = 423,
+          status = "info",
           selectInput(
             "pie_state",
             label = "State of Your Choice",
@@ -147,46 +169,69 @@ shinyUI(fluidPage(
             value = c(min, max)
           )
         )
+        )
       ),
       
       # tab for sankey diagram
       tabItem(
         tabName = "sankey",
         h1("Cancer Information Flow in Sankey Diagram"),
+        fluidRow(
         box(
+          width = 12,
+          status = "success",
           plotlyOutput("sankey_output")
+        )
         ),
         h2("Options"),
+        fluidRow(
         box(
-          color = "purple",
-          actionLink("selectall_state","Select All State"),
+          status = "info",
+          actionButton("selectall_state","Select All State/Unselect All"),
           checkboxGroupInput(
             "sankey_state",
             label = "State of Your Choice",
             choices = unique(modified_data$area),
-            selected = "Alabama"
-          ),
-          actionLink("selectall_race","Select All Race"),
+            selected = "Alabama",
+            inline = TRUE
+          )
+        ),
+        box(
+          status = "info",
+          actionButton("selectall_site","Select All Sites/Unselect All"),
           checkboxGroupInput(
-            "sankey_race",
-            label = "Race of Your Choice",
-            choices = unique(modified_data$race),
-            selected = "All Races"
-          ),
-          actionLink("selectall_sex","Select All Genders"),
+            "sankey_site",
+            label = "Site of Your Choice",
+            choices = unique(modified_data$site),
+            selected = "All Cancer Sites Combined",
+            inline = TRUE
+          )
+        )
+        ),
+        fluidRow(
+        box(
+          status = "info",
+          actionButton("selectall_sex","Select All Genders/Unselect All"),
           checkboxGroupInput(
             "sankey_sex",
             label = "Gender of Your Choice",
             choices = unique(modified_data$sex),
             selected = "Male and Female"
-          ),
-          actionLink("selectall_site","Select All Sites"),
+          )
+        ),
+        box(
+          status = "info",
+          actionButton("selectall_race","Select All Race/Unselect All"),
           checkboxGroupInput(
-            "sankey_site",
-            label = "Site of Your Choice",
-            choices = unique(modified_data$site),
-            selected = "All Cancer Sites Combined"
-          ),
+            "sankey_race",
+            label = "Race of Your Choice",
+            choices = unique(modified_data$race),
+            selected = "All Races"
+          )
+        ),
+        box(
+          width = 12,
+          status = "info",
           sliderInput(
             "sankey_year",
             label = "Select your desired year range",
@@ -194,6 +239,7 @@ shinyUI(fluidPage(
             max = max(modified_data$year),
             value = c(min, max)
           )
+        )
         )
       )
     )

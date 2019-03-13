@@ -1,0 +1,16 @@
+/* Css File for shinyaapp */
+
+#shiny-tab-pie > .row {
+    clear: both;
+    display: inline;
+}
+
+#shiny-tab-pie > .row > h1 {
+    float: left;
+    padding-left: 15px;
+}
+
+#shiny-tab-pie > .row > h2 {
+    float: right;
+    padding-right: 340px;
+}

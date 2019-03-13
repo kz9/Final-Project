@@ -86,7 +86,6 @@ build_sankey <- function(data, state_pass, race_pass, sex_pass,
     )
   ) %>%
     layout(
-      title = "Sankey Diagram",
       font = list(
         size = 10
       )

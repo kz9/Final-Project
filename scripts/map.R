@@ -38,9 +38,9 @@ build_map <- function(data, option, min, max) {
       locations = ~code,
       color = ~count_item, colors = 'Purples'
     ) %>%
-    colorbar(title = str_to_title(sub("_", " ", option))) %>%
+    colorbar(title = str_to_title(gsub("_", " ", option))) %>%
     layout(
-      title = str_to_title(sub("_", " ", option)),
+      title = str_to_title(gsub("_", " ", option)),
       geo = g
     )
   p
