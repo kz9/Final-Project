@@ -25,6 +25,11 @@ shinyUI(fluidPage(
           tabName = "map",
           icon = icon("globe")
         ),
+        menuItem(
+          "Cancer Population VS Rate",
+          tabName = "animation",
+          icon = icon("hand-pointer")
+        ),
         menuItem("State VS Site",
           tabName = "pie",
           icon = icon("chart-pie")
@@ -43,6 +48,7 @@ shinyUI(fluidPage(
         )
       )
     ),
+
     # position for different plots
     dashboardBody(
       tags$head(
@@ -90,6 +96,36 @@ shinyUI(fluidPage(
                 min = min(modified_data$year),
                 max = max(modified_data$year),
                 value = c(min, max)
+              )
+            )
+          )
+        ),
+
+        # tab for animation scatter chart
+        tabItem(
+          tabName = "animation",
+          h1("Cancer Population VS Rate Scatter Chart"),
+          includeMarkdown("./markdown/animation.md"),
+          fluidRow(
+            box(
+              width = 12,
+              status = "success",
+              plotlyOutput("animation_output")
+            )
+          ),
+          h2("Options"),
+          fluidRow(
+            box(
+              width = 12,
+              status = "info",
+              selectInput(
+                "animation_option",
+                label = "Rate of Your Choice",
+                choices = list(
+                  "Age Adjusted Rate" = "age_adjusted_rate",
+                  "Crude Rate" = "crude_rate"
+                ),
+                selected = "Age Adjusted Rate"
               )
             )
           )

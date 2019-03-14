@@ -8,6 +8,7 @@ library(plotly)
 
 # read in functions and data
 source("./scripts/map.R")
+source("./scripts/anime.R")
 source("./scripts/pie.R")
 source("./scripts/plot.R")
 source("./scripts/sorted_data.R")
@@ -217,6 +218,11 @@ shinyServer(function(input, output, session) {
       modified_data, input$map_options, input$map_year[1],
       input$map_year[2]
     )
+  })
+
+  # animation graph (scatter plot)
+  output$animation_output <- renderPlotly({
+    build_animation(modified_data, input$animation_option)
   })
 
   # pie graph
