@@ -23,12 +23,14 @@ build_line <- function(data, sex_pass, site_pass, min, max, option) {
 
   # make line plot
   p <- plot_ly(data = modified_data, split = TRUE)
-  for (i in 1:length(sex_pass)){
+  for (i in 1:length(sex_pass)) {
     sex <- sex_pass[i]
-    p <- add_trace(p, y=modified_data[[sex]], x=~year,
-                   type="scatter", mode="markers+lines",
-                   name=sex_pass[i]) %>%
-      layout(colorway = c('#764EC5', '#DAB72D', '#969696'))
+    p <- add_trace(p,
+      y = modified_data[[sex]], x = ~year,
+      type = "scatter", mode = "markers+lines",
+      name = sex_pass[i]
+    ) %>%
+      layout(colorway = c("#764EC5", "#DAB72D", "#969696"))
   }
   p
 }

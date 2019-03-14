@@ -23,12 +23,17 @@ build_bar <- function(data, race_pass, site_pass, min, max, option) {
 
   # make bar plot
   p <- plot_ly(data = modified_data, split = TRUE)
-  for (i in 1:length(race_pass)){
+  for (i in 1:length(race_pass)) {
     race <- race_pass[i]
-    p <- add_trace(p, y=modified_data[[race]], x=~year,
-                   type="bar",
-                   name=race_pass[i]) %>%
-                   layout(colorway = c('#764EC5', '#7DD1F0', '#B4B3AE', '#B0E063', '#FF6369', '#FFE669'))
+    p <- add_trace(p,
+      y = modified_data[[race]], x = ~year,
+      type = "bar",
+      name = race_pass[i]
+    ) %>%
+      layout(colorway = c(
+        "#764EC5", "#7DD1F0", "#B4B3AE", "#B0E063", "#FF6369",
+        "#FFE669"
+      ))
   }
   p
 }

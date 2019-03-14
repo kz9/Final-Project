@@ -1,5 +1,13 @@
 /* Css File for shinyaapp */
 
+body, article {
+    font-family: 'Open Sans', sans-serif, serif;
+}
+
+h1, h2 {
+    font-family: 'Encode Sans', sans-serif, serif;
+}
+
 #intro {
     text-align: center;
 }

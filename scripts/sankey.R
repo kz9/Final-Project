@@ -18,10 +18,12 @@ build_sankey <- function(data, state_pass, race_pass, sex_pass,
     filter(sex %in% sex_pass) %>%
     filter(year >= min, year <= max) %>%
     filter(site %in% site_pass)
-  
-  label_list <- c(unique(modified_data$area), unique(modified_data$race),
-                  unique(modified_data$sex), unique(modified_data$site))
-  
+
+  label_list <- c(
+    unique(modified_data$area), unique(modified_data$race),
+    unique(modified_data$sex), unique(modified_data$site)
+  )
+
   # table state vs race
   table_sr <- modified_data %>%
     group_by(area, race) %>%
@@ -32,7 +34,7 @@ build_sankey <- function(data, state_pass, race_pass, sex_pass,
       area_index = match(area, label_list) - 1,
       race_index = match(race, label_list) - 1
     )
-  
+
   # table race vs sex
   table_rs <- modified_data %>%
     group_by(race, sex) %>%
@@ -43,7 +45,7 @@ build_sankey <- function(data, state_pass, race_pass, sex_pass,
       race_index = match(race, label_list) - 1,
       sex_index = match(sex, label_list) - 1
     )
-  
+
   # table sex vs site
   table_ss <- modified_data %>%
     group_by(sex, site) %>%
@@ -55,7 +57,7 @@ build_sankey <- function(data, state_pass, race_pass, sex_pass,
       site_index = match(site, label_list) - 1
     )
 
-  # make a sankey diagram  
+  # make a sankey diagram
   p <- plot_ly(
     type = "sankey",
     node = list(
@@ -67,7 +69,7 @@ build_sankey <- function(data, state_pass, race_pass, sex_pass,
         width = 0.5
       )
     ),
-    
+
     link = list(
       source = c(table_sr$area_index, table_rs$race_index, table_ss$sex_index),
       target = c(table_sr$race_index, table_rs$sex_index, table_ss$site_index),

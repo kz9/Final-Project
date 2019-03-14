@@ -21,8 +21,8 @@
 - <span style="Font-size:20px">Which cancer types are the most **prevalence** ones in U.S? Is this different in different _state/years_?</span>
 - <span style="Font-size:20px">Does cancer statistics show any differences between **male and female**?</span>
 
-<article style="Font-size:20px">
+<section style="Font-size:20px">
     <p>
-    &emsp;The website helps us to analysis the dataset in many ways. People can easily use our website to study their interest in cancer, observing the relationships between various factors and changing tendencies of the number of patients over the years. 
+    &emsp;The website helps us to analysis the dataset in many ways. People can easily use our website to study their interest in cancer, observing the relationships between various factors and changing tendencies of the number of patients over the years.
     </p>
-</article>
+</section>
