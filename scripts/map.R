@@ -20,7 +20,10 @@ build_map <- function(data, option, min, max) {
       state.abb[match(area, state.name)]
     )) %>%
     group_by(code) %>%
-    summarise(count_item = sum(eval(sym(option)), na.rm = T)) %>%
+    summarise(count_item = ifelse(option == "count",
+      sum(eval(sym(option)), na.rm = T),
+      mean(eval(sym(option)), na.rm = T)
+    )) %>%
     arrange(-count_item)
   # setup hover text
   modified_data$hover <- with(

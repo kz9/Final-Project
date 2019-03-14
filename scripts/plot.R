@@ -17,7 +17,10 @@ build_line <- function(data, sex_pass, site_pass, min, max, option) {
     filter(race == "All Races") %>%
     filter(site == site_pass) %>%
     group_by(sex, year) %>%
-    summarise(count_item = sum(eval(sym(option)), na.rm = T)) %>%
+    summarise(count_item = ifelse(option == "count",
+      sum(eval(sym(option)), na.rm = T),
+      mean(eval(sym(option)), na.rm = T)
+    )) %>%
     filter(sex %in% sex_pass) %>%
     spread(key = sex, value = count_item)
 
@@ -25,12 +28,21 @@ build_line <- function(data, sex_pass, site_pass, min, max, option) {
   p <- plot_ly(data = modified_data, split = TRUE)
   for (i in 1:length(sex_pass)) {
     sex <- sex_pass[i]
-    p <- add_trace(p,
-      y = modified_data[[sex]], x = ~year,
-      type = "scatter", mode = "markers+lines",
-      name = sex_pass[i]
-    ) %>%
-      layout(colorway = c("#764EC5", "#DAB72D", "#969696"))
+    if (length(modified_data[[sex]]) > 1) {
+      p <- add_trace(p,
+        y = modified_data[[sex]], x = ~year,
+        type = "scatter", mode = "markers+lines",
+        name = sex_pass[i]
+      ) %>%
+        layout(colorway = c("#764EC5", "#DAB72D", "#969696"))
+    } else {
+      p <- add_trace(p,
+        y = rep(0, length(modified_data$year)), x = ~year,
+        type = "scatter", mode = "markers+lines",
+        name = sex_pass[i]
+      ) %>%
+        layout(colorway = c("#764EC5", "#DAB72D", "#969696"))
+    }
   }
   p
 }

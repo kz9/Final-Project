@@ -16,7 +16,7 @@ build_animation <- function(data, option) {
     summarise(
       total_pop = sum(population, na.rm = T),
       total_cancer = sum(count, na.rm = T),
-      total_option = sum(eval(sym(option)), na.rm = T)
+      total_option = mean(eval(sym(option)), na.rm = T)
     )
 
   # setup animation
@@ -26,7 +26,7 @@ build_animation <- function(data, option) {
       y = ~total_option,
       size = ~total_pop,
       color = ~area,
-      colors = "Spectral", 
+      colors = "Spectral",
       frame = ~year,
       text = ~area,
       hoverinfo = "text",

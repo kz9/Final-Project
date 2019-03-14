@@ -17,7 +17,13 @@ build_bar <- function(data, race_pass, site_pass, min, max, option) {
     filter(sex == "Male and Female") %>%
     filter(site == site_pass) %>%
     group_by(race, year) %>%
-    summarise(count_item = sum(eval(sym(option)), na.rm = T)) %>%
+    summarise(
+      count_item =
+        ifelse(option == "count",
+          sum(eval(sym(option)), na.rm = T),
+          mean(eval(sym(option)), na.rm = T)
+        )
+    ) %>%
     filter(race %in% race_pass) %>%
     spread(key = race, value = count_item)
 

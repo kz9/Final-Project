@@ -15,8 +15,8 @@ build_pie <- function(data, state_pass, site_pass, min, max) {
     filter(year <= max, year >= min) %>%
     filter(race == "All Races") %>%
     summarise(
-      age_adjusted_rate = sum(age_adjusted_rate, na.rm = T),
-      crude_rate = sum(crude_rate, na.rm = T)
+      age_adjusted_rate = mean(age_adjusted_rate, na.rm = T),
+      crude_rate = mean(crude_rate, na.rm = T)
     )
 
   origin <- c(modified_data$age_adjusted_rate, modified_data$crude_rate)
