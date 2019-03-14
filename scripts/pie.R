@@ -25,8 +25,8 @@ build_pie <- function(data, state_pass, site_pass, min, max){
         labels = paste0(percentage, "%"),
         explode = 0.1, 
       main = "Pie Chart of Site VS State",
-  col=c("#DAB72D","#764EC5"),
+  col=c("#FFE669","#764EC5"),
   mar = c(4.5, 4.5, 4.5, 4.5))
   legend("topright", c("Age Adjusted Rate", "Crude Rate"),
-         fill = c("#DAB72D","#764EC5"))
+         fill = c("#FFE669","#764EC5"))
 }
