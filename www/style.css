@@ -1,0 +1,32 @@
+/* Css File for shinyaapp */
+
+body, article {
+    font-family: 'Open Sans', sans-serif, serif;
+}
+
+h1, h2 {
+    font-family: 'Encode Sans', sans-serif, serif;
+}
+
+#intro {
+    text-align: center;
+}
+
+#shiny-tab-pie > .row {
+    clear: both;
+    display: inline;
+}
+
+#shiny-tab-pie > .row > h1 {
+    float: left;
+    padding-left: 15px;
+}
+
+#shiny-tab-pie > .row > h2 {
+    float: right;
+    padding-right: 340px;
+}
+
+.shiny-output-error {
+    visibility: hidden;
+}
