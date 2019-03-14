@@ -17,9 +17,10 @@ The dataset we will be working with is the **U.S. Cancer Statistics** from **199
 Our target **audiences** could be professional public health staff, as well as people who are interested in cancer statistics or _suspicious_ about their own health condition. The **latter** one is the audience we put _more_ focuses on, since our goal is to enable the general public to figure out their own propensity of cancer dangers. 
 
 * Possible questions answer for audience:
-    + How could cancer rate be possibly affected by different states, genders, rates, or other individuals’ factors?
-    + Which cancer type is the most prevalence one in U.S? Are there differences in different state/area?
-    + Does cancer mortality show any differences between male and female?
+    + How could cancer population be possibly affected by different states, years, and races?
+    + Which cancer types are the most prevalence ones in U.S? Is this different in different state/years?
+    + Does cancer statistics show any differences between male and female?
+
 
 ## Technical Description
 - In the final project we will use both _API_ and _csv_ in order to achieve our goal.  From API, we will use `httr` and `jsonlite` libraries to parse the _JSON data_ from api to a R data frame. From .csv, we will just use basic read.csv function to parse the data.
