@@ -3,6 +3,7 @@
 library(shiny)
 library(shinydashboard)
 library(shinyalert)
+library(shinyjs)
 library(markdown)
 library(plotly)
 
@@ -31,7 +32,6 @@ shinyUI(fluidPage(
                  icon = icon("chart-bar")),
         menuItem("Information Flow", tabName = "sankey",
                  icon = icon("th"))
-        
       )
   ),
   # position for different plots

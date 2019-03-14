@@ -3,6 +3,7 @@
 library(shiny)
 library(shinydashboard)
 library(shinyalert)
+library(shinyjs)
 library(markdown)
 library(plotly)
 
@@ -30,7 +31,7 @@ shinyServer(function(input, output, session){
   
   # restrict checkbox
   observe({
-    
+    # setup selected
     if (("Asian/Pacific Islander" %in% input$bar_race |
         "American Indian/Alaska Native" %in% input$bar_race) &
         input$bar_site == "All Cancer Sites Combined")  {
