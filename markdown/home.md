@@ -13,9 +13,16 @@
     visual representations built, our primary goal is to help the general public who is interested
     in cancer statistics or _suspicious_ about their own health condition.
     </p>
+
 </article>
 
 <h2>Possible answers to be answered:</h2>
 - <span style="Font-size:20px">How could cancer population be possibly affected by different **states, years, and races**?</span>
 - <span style="Font-size:20px">Which cancer types are the most **prevalence** ones in U.S? Is this different in different _state/years_?</span>
 - <span style="Font-size:20px">Does cancer statistics show any differences between **male and female**?</span>
+
+<article style="Font-size:20px">
+    <p>
+    &emsp;The website helps us to analysis the dataset in many ways. People can easily use our website to study their interest in cancer, observing the relationships between various factors and changing tendencies of the number of patients over the years. 
+    </p>
+</article>
