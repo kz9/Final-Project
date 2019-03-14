@@ -2,6 +2,8 @@
 # load needed library
 library(shiny)
 library(shinydashboard)
+library(shinyalert)
+library(markdown)
 library(plotly)
 
 source("./scripts/sorted_data.R")
@@ -21,10 +23,12 @@ shinyUI(fluidPage(
         menuItem("HomePage", tabName = "home", icon = icon("home")),
         menuItem("Cancer USA Distribution", tabName = "map",
                  icon = icon("globe")),
-        menuItem("Gender VS Site", tabName = "line",
-                 icon = icon("chart-line")),
         menuItem("State VS Site", tabName = "pie",
                  icon = icon("chart-pie")),
+        menuItem("Gender VS Site", tabName = "line",
+                 icon = icon("chart-line")),
+        menuItem("Race VS Site", tabName = "bar",
+                 icon = icon("chart-bar")),
         menuItem("Information Flow", tabName = "sankey",
                  icon = icon("th"))
         
@@ -39,14 +43,15 @@ shinyUI(fluidPage(
       
       # Home Page
       tabItem(
-        tabName = "home"
-        
+        tabName = "home",
+        includeMarkdown("./markdown/home.md")
       ),
       
       # Map Graph
       tabItem(
         tabName = "map",
         h1("Cancer Map"),
+        includeMarkdown("./markdown/map.md"),
         fluidRow(
         box(
           width = 12,
@@ -81,10 +86,51 @@ shinyUI(fluidPage(
         )
       ),
       
+      # tab for pie chart
+      tabItem(
+        tabName = "pie",
+        fluidRow(
+          h1("State VS Site Pie Chart"),
+          h2("Options"),
+          hr()
+        ),
+        fluidRow(
+          box(
+            status = "success",
+            plotOutput("pie_output")
+          ),
+          box(
+            height = 423,
+            status = "info",
+            selectInput(
+              "pie_state",
+              label = "State of Your Choice",
+              choices = unique(modified_data$area),
+              selected = "Alaska"
+            ),
+            selectInput(
+              "pie_site",
+              label = "Site of Your Choice",
+              choices = unique(modified_data$site),
+              selected = "All Cancer Sites Combined"
+            ),
+            sliderInput(
+              "pie_year",
+              label = "Select your desired year range",
+              min = min(modified_data$year),
+              max = max(modified_data$year),
+              value = c(min, max)
+            )
+          )
+        ),
+        includeMarkdown("./markdown/pie.md")
+      ),
+      
       # Line Graph
       tabItem(
         tabName = "line",
         h1("Gender VS Site Line Chart"),
+        includeMarkdown("./markdown/line.md"),
         fluidRow(
         box(
           width = 12,
@@ -121,7 +167,7 @@ shinyUI(fluidPage(
             "Cancer Population" = "count",
             "Crude Rate" = "crude_rate"
             ),
-            selected = "Cancer Population"
+            selected = "Age Adjust Rage"
           ),
           sliderInput(
             "plot_year",
@@ -134,42 +180,53 @@ shinyUI(fluidPage(
         )
       ),
       
-      # tab for pie chart
+      # Bar Graph
       tabItem(
-        tabName = "pie",
+        tabName = "bar",
+        h1("Race VS Site Bar Chart"),
         fluidRow(
-          h1("State VS Site Pie Chart"),
-          h2("Options"),
-          hr()
-        ),
-        fluidRow(
-        box(
-          status = "success",
-          plotOutput("pie_output")
-        ),
-        box(
-          height = 423,
-          status = "info",
-          selectInput(
-            "pie_state",
-            label = "State of Your Choice",
-            choices = unique(modified_data$area),
-            selected = "Alaska"
-            ),
-          selectInput(
-            "pie_site",
-            label = "Site of Your Choice",
-            choices = unique(modified_data$site),
-            selected = "All Cancer Sites Combined"
-          ),
-          sliderInput(
-            "pie_year",
-            label = "Select your desired year range",
-            min = min(modified_data$year),
-            max = max(modified_data$year),
-            value = c(min, max)
+          box(
+            width = 12,
+            status = "success",
+            plotlyOutput("bar_output")
           )
-        )
+        ),
+        h2("Options"),
+        fluidRow(
+          box(
+            width = 12,
+            status = "info",
+            useShinyalert(),
+            checkboxGroupInput(
+              "bar_race",
+              label = "Race of Your Choice",
+              choices = unique(modified_data$race),
+              selected = "All Races"
+            ),
+            selectInput(
+              "bar_site",
+              label = "Site of Your Choice",
+              choices = unique(modified_data$site),
+              selected = "All Cancer Sites Combined"
+            ),
+            selectInput(
+              "bar_option",
+              label = "Feature of Your Choice",
+              choices = list(
+                "Age Adjust Rage" = "age_adjusted_rate",
+                "Cancer Population" = "count",
+                "Crude Rate" = "crude_rate"
+              ),
+              selected = "Age Adjust Rage"
+            ),
+            sliderInput(
+              "bar_year",
+              label = "Select your desired year range",
+              min = min(modified_data$year),
+              max = max(modified_data$year),
+              value = c(min, max)
+            )
+          )
         )
       ),
       
@@ -177,6 +234,7 @@ shinyUI(fluidPage(
       tabItem(
         tabName = "sankey",
         h1("Cancer Information Flow in Sankey Diagram"),
+        includeMarkdown("./markdown/sankey.md"),
         fluidRow(
         box(
           width = 12,

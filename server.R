@@ -2,6 +2,8 @@
 # load needed library
 library(shiny)
 library(shinydashboard)
+library(shinyalert)
+library(markdown)
 library(plotly)
 
 # read in functions and data
@@ -10,11 +12,37 @@ source("./scripts/pie.R")
 source("./scripts/plot.R")
 source("./scripts/sorted_data.R")
 source("./scripts/sankey.R")
+source("./scripts/bar.R")
 
 # start shiny server
 shinyServer(function(input, output, session){
-  # select all
+  # when Asian/Pacific Islander and American Indian/Alaska Native clicked
+  # with All Cancer Sites Combined selected
+  observeEvent(input$bar_race, {
+    if (("Asian/Pacific Islander" %in% input$bar_race |
+        "American Indian/Alaska Native" %in% input$bar_race) &
+        input$bar_site == "All Cancer Sites Combined") {
+      shinyalert("Oops!",
+          "The race you selected don't have All Cancer Sites Combined Value",
+          type = "error")
+    }
+  })
+  
+  # restrict checkbox
   observe({
+    
+    if (("Asian/Pacific Islander" %in% input$bar_race |
+        "American Indian/Alaska Native" %in% input$bar_race) &
+        input$bar_site == "All Cancer Sites Combined")  {
+      updateCheckboxGroupInput(session,
+                               "bar_race",
+                               label = "Race of Your Choice",
+                               choices = unique(modified_data$race),
+                               selected = input$bar_race[input$bar_race !=
+                                          "Asian/Pacific Islander" &
+                                            input$bar_race !=
+                                            "American Indian/Alaska Native"])
+    }
     
     # restrict checkbox for line graph
     if (length(input$plot_gender) < 1) {
@@ -27,6 +55,15 @@ shinyServer(function(input, output, session){
                                  "Male and Female" = "Male and Female"
                                ),
                                selected = "Male and Female")
+    }
+    
+    # restrict checkbox for bar graph
+    if (length(input$bar_race) < 1) {
+      updateCheckboxGroupInput(session,
+                               "bar_race",
+                               label = "Race of Your Choice",
+                               choices = unique(modified_data$race),
+                               selected = "All Races")
     }
     
     # restrict checkbox for sankey diagram state
@@ -154,16 +191,22 @@ shinyServer(function(input, output, session){
               input$map_year[2])
   })
   
+  # pie graph
+  output$pie_output <- renderPlot({
+    build_pie(modified_data, input$pie_state, input$pie_site,
+              input$pie_year[1], input$pie_year[2])
+  })
+  
   # plot graph
   output$plot_output <- renderPlotly({
     build_line(modified_data, input$plot_gender, input$plot_site,
                input$plot_year[1], input$plot_year[2], input$plot_option)
   })
   
-  # pie graph
-  output$pie_output <- renderPlot({
-    build_pie(modified_data, input$pie_state, input$pie_site,
-              input$pie_year[1], input$pie_year[2])
+  # bar graph
+  output$bar_output <- renderPlotly({
+    build_bar(modified_data, input$bar_race, input$bar_site,
+              input$bar_year[1], input$bar_year[2], input$bar_option)
   })
   
   # Sankey Diagram

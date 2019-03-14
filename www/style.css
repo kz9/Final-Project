@@ -1,5 +1,9 @@
 /* Css File for shinyaapp */
 
+#intro {
+    text-align: center;
+}
+
 #shiny-tab-pie > .row {
     clear: both;
     display: inline;
@@ -13,4 +17,12 @@
 #shiny-tab-pie > .row > h2 {
     float: right;
     padding-right: 340px;
+}
+
+.shiny-output-error {
+    visibility: hidden;
+}
+
+.shiny-output-error:before {
+    visibility: hidden;
 }
