@@ -213,11 +213,11 @@ shinyUI(fluidPage(
               "bar_option",
               label = "Feature of Your Choice",
               choices = list(
-                "Age Adjust Rage" = "age_adjusted_rate",
+                "Age Adjust Rate" = "age_adjusted_rate",
                 "Cancer Population" = "count",
                 "Crude Rate" = "crude_rate"
               ),
-              selected = "Age Adjust Rage"
+              selected = "Age Adjust Rate"
             ),
             sliderInput(
               "bar_year",
