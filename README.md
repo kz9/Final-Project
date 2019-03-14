@@ -1,7 +1,8 @@
 # INFO201 Final Group Project Proposal
 ## [Final Project Website Link](https://kzz9.shinyapps.io/Final-Project/)
+## [Github Page](https://kz9.github.io/Final-Project/)
 
-![Cancer](https://www.wraltechwire.com/wp-content/uploads/2018/04/cancer.jpg)
+![Cancer(https://www.wraltechwire.com/wp-content/uploads/2018/04/cancer.jpg)
 
 ###### Copyright WRAL TechWire
 
